@@ -43,7 +43,7 @@ inline bool exists_test (const string& name)
 }
 void GetHeader(const string str, string &strHeader)
 {
-    strHeader = "HTTP/1.0 "+str+"\nContent-Type: text/html\n\n";
+    strHeader = "HTTP/1.0 "+str+"\nContent-Type: text/html\r\n\r\n";
 }
 void GetConnection(int argc, char **argv)
 {
@@ -120,20 +120,20 @@ void ProcessRequest(int sock)
         path = m_dir+"/"+path;//full file name
         if (stat (path.c_str(), &buffer) != 0)
         {   bodycontent = "There were no such file or resource. But We can tell you a fairytale. Once upon a time...";
-            GetHeader("404 File Not Found\nContent-length: 0", header);
+            GetHeader("404 File Not Found\r\nContent-length: 0", header);
             break;
         }
         if (ReadFile(path, bodycontent)==0)
         {
             bodycontent = "There were no such file or resource. But We can tell you a fairytale. Once upon a time...";
-            GetHeader("404 File Not Found\nContent-length: 0", header);
+            GetHeader("404 File Not Found\r\nContent-length: 0", header);
             break;
         }
         else
         {
             //we already have bodycontent
             string szstr = to_string(bodycontent.size());
-            string tmp = "200 OK\nContent-length: "+szstr;
+            string tmp = "200 OK\r\nContent-length: "+szstr;
             GetHeader(tmp, header);
         }
     } while (false);
