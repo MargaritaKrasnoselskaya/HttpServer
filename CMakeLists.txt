@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8)
-set(OUTPUT_NAME final)
 project(final)
-
+set(RUNTIME_OUTPUT_NAME final)
+set(EXECUTABLE_OUTPUT_PATH /home/box/final/final)
 set(SOURCES HttpServer.cpp)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11 -O0 -pthread -DUNIX")
 
