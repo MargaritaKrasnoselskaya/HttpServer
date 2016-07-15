@@ -61,7 +61,7 @@ void GetConnection(int argc, char **argv)
                 break;
             case 'd':
                 m_dir = optarg;
-                cerr<<"dir: "<<m_dir<<"\n";
+               // cerr<<"dir: "<<m_dir<<"\n";
                 break;
  			default:
                cout<<"Options:\n -h defines IP adress\n  -p defines port\n -d defines directory\n";
