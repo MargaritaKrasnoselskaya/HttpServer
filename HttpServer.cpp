@@ -43,7 +43,7 @@ inline bool exists_test (const string& name)
 }
 void GetHeader(const string str, string &strHeader)
 {
-    strHeader = "HTTP/1.0 "+str+"\nContent-Type: text/html\r\n\r\n";
+    strHeader = "HTTP/1.0 "+str+"\r\nContent-Type: text/html\r\n\r\n";
 }
 void GetConnection(int argc, char **argv)
 {
