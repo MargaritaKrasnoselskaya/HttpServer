@@ -65,7 +65,7 @@ void GetConnection(int argc, char **argv)
                 break;
  			default:
                cout<<"Options:\n -h defines IP adress\n  -p defines port\n -d defines directory\n";
-                exit(0);
+                exit(1);
         }
     }
     return;
