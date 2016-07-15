@@ -156,7 +156,7 @@ int main(int argc, char **argv )
     if (argc !=7 ) { cout<<"Wrong format. Use -h adress, -p port, -d dir"; return -1; }
     int   pid=fork(); //start Daemon
     if (pid ==-1 ) { cout<<"Can not start Server Process "; exit(1);}
-    if (pid > 0)  return 1;
+    if (pid > 0)  return 0;
     //close server Console
     close(STDIN_FILENO); open("/dev/null",O_RDONLY);
     close(STDOUT_FILENO); open("/dev/null",O_WRONLY);
