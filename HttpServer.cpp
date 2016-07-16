@@ -92,13 +92,28 @@ void CreateSocket()
 }
 int ReadFile(const string fileName, string& resStr)
 {
+    FILE *file = fopen(fileName.c_str(), "r");
+    if (file)
+    {
+        fseek(file, 0, SEEK_END);
+        size_t sz = ftell(file);
+        fseek(file, 0, SEEK_SET);
+        char *buffer = (char*) malloc (sizeof(char)*sz);
+        bzero(buffer, sz);
+        fread(buffer, sizeof(char), sz, file);
+        resStr = string(buffer);
+        fclose(file);
+        return 1;
+    }
+   // cerr<<"!!!"<<fileName<<"!!!\n";
+   /* return 0;
     char temp;
     ifstream ifs(fileName);
     if(!ifs) return 0;
     ifs.unsetf(ios::skipws);
     while(ifs >> temp)
     resStr += temp;
-    return 1;
+    return 1;*/
 }
 void ProcessRequest(int sock)
 {   //process Server request
@@ -119,6 +134,7 @@ void ProcessRequest(int sock)
         struct stat buffer;
         if (path[0]=='/') path = m_dir+path;
         else path = m_dir+"/"+path;
+        if (path[path.length()-1]==' ') path = path.substr(0, path.length()-1);
         if (stat (path.c_str(), &buffer) != 0)
         {   bodycontent = "There were no such file or resource. But We can tell you a fairytale. Once upon a time...";
             GetHeader("404 File Not Found\r\nContent-length: 0", header);
