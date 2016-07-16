@@ -16,7 +16,7 @@
 #include <iostream>
 #include <getopt.h>
 #include <cerrno>
-//O_RDONLY
+//O_RDONLY 
 #include <fcntl.h>
 //for socc=kaddr
 #include <sys/types.h>
