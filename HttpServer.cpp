@@ -111,13 +111,14 @@ void ProcessRequest(int sock)
     do
     {
         if (len<9) { GetHeader("500 Internal Server Error", header); break;}
-        if (str.substr(0, 4) != "GET " || str.substr(len-8, 8) != " HTTP/1.") { GetHeader("500 Internal Server Error", header); break;}
+        if (str.substr(0, 4) != "GET " || str.substr(len-8, 8) != " HTTP/1." && str.substr(len-9, 9) != " HTTP/1.0") { GetHeader("500 Internal Server Error", header); break;}
         size_t pos = str.find("?");
         if (pos == string::npos) path = str.substr(4, len-12);
         else path = str.substr(4, pos-4);
 
         struct stat buffer;
-        path = m_dir+"/"+path;//full file name
+        if (path[0]=='/') path = m_dir+path;
+        else path = m_dir+"/"+path;
         if (stat (path.c_str(), &buffer) != 0)
         {   bodycontent = "There were no such file or resource. But We can tell you a fairytale. Once upon a time...";
             GetHeader("404 File Not Found\r\nContent-length: 0", header);
